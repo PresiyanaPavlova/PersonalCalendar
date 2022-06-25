@@ -51,10 +51,22 @@ public class test2 {
         }
     }
     public static int getStartDay (int month){
-        int startDay1800 = 3;
+        int startDay2022 = 3;
         int totalNumberOfDays = getTotalNumberOfDays(month);
-        return (totalNumberOfDays + startDay1800)  % 7;
+        return (totalNumberOfDays + startDay2022) % 7;
     }
+    public static int getNumberOfDaysInMonth (int month){
+        if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+            return 31;
+        } else if (month == 4 || month == 6 || month == 9 || month 11) {
+            return 30;
+        } else {
+            return 28;
+        }
+    }
+     public static void getTotalNumberOfDays (int month){
+
+     }
 
     public static void main(String[] args) {
     }
