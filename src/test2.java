@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class test2 {
@@ -28,7 +31,7 @@ public class test2 {
 
     public static void printMonth(int month) {
         printMonthTitle(month);
-        printMonthBody(month);
+       printMonthBody(month);
     }
 
     public static void printMonthBody(int month) {
@@ -40,9 +43,9 @@ public class test2 {
         }
         for (int i = 1; i <= numberOfDaysInMonth; i++) {
             if (i < 10) {
-                System.out.println("      " + i);
+                System.out.print("      " + i);
             } else {
-                System.out.println("      " + i);
+                System.out.print("      " + i);
             }
             if ((i + startDay) % 7 == 0) {
                 System.out.println();
@@ -51,26 +54,45 @@ public class test2 {
         }
     }
     public static int getStartDay (int month){
-        int startDay2022 = 3;
-        int totalNumberOfDays = getTotalNumberOfDays(month);
-        return (totalNumberOfDays + startDay2022) % 7;
+       int totalNumberOfDays = getNumberOfDaysInMonth(month);
+        return (totalNumberOfDays + findDay(month,1, 2022)) % 7;
+   }
+   public static int findDay(int month, int day, int year) {                      //determine which day of the week
+        SimpleDateFormat simpleDateformat = new SimpleDateFormat("EEEE");
+        Date date = new GregorianCalendar(year, month - 1, day).getTime();     //see how to get rid of year, so it's2022 by default, and day 1 as default
+        String dayOfTheWeek = simpleDateformat.format(date);
+        int dayOfTheWeekInt = 0;
+        switch (dayOfTheWeek.toUpperCase()){
+            case "MONDAY" : dayOfTheWeekInt = 1; break;
+            case "TUESDAY": dayOfTheWeekInt = 2; break;
+            case "WEDNESDAY": dayOfTheWeekInt = 3; break;
+            case "THURSDAY": dayOfTheWeekInt = 4; break;
+            case "FRIDAY": dayOfTheWeekInt = 5; break;
+            case "SATURDAY": dayOfTheWeekInt = 6; break;
+            case "SUNDAY": dayOfTheWeekInt = 7;
+        }
+
+        return dayOfTheWeekInt;
     }
     public static int getNumberOfDaysInMonth (int month){
-        if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
-            return 31;
-        } else if (month == 4 || month == 6 || month == 9 || month 11) {
-            return 30;
-        } else {
-            return 28;
+        int numberOfDaysInMonth = 0;
+        switch (month){
+            case 1, 3, 5, 7, 8, 10, 12:
+                numberOfDaysInMonth = 31; break;
+            case 2: numberOfDaysInMonth = 28; break;
+            case 4, 6, 9, 11:
+                numberOfDaysInMonth = 30; break;
         }
+        return numberOfDaysInMonth;
     }
-     public static void getTotalNumberOfDays (int month){
+       public static void main(String[] args) {
 
-     }
 
-    public static void main(String[] args) {
-    }
-
-    Scanner scan = new Scanner(System.in);
+           Scanner scan = new Scanner(System.in);
+           System.out.println("Enter month");
+           int month = scan.nextInt();
+    printMonthTitle(month);
+    printMonthBody(month);
+       }
 
 }
