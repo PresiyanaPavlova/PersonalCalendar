@@ -81,17 +81,49 @@ public class test2 {
     }
        public static void main(String[] args) {
            Scanner scan = new Scanner(System.in);
-           System.out.println("Welcome to your personal calendar! It looks empty, let's create an event.\nLet's see what month would you like to see?");
+           System.out.println("Welcome to your personal calendar! It looks empty, let's create an event.\nWhich month would you like to see?");
            int month = scan.nextInt();
            printMonthTitle(month);
            printMonthBody(month);
+           System.out.println();
+           userInputEventInfo(scan);
        }
        //starting the schedule
     public static void userInputEventInfo (Scanner scan){
-        System.out.println("What date is your event?");
+
+        System.out.println("What date would you like to schedule an event for?");
         String date = scan.nextLine();
-        System.out.println("What time is your event?");
-        String time = scan.nextLine();
+        System.out.println("How many events would you like to schedule for this day?");
+        int numberOfEvents = scan.nextInt();
+        String[][] timetable = new String[numberOfEvents][5];
+
+        timetable[0][0] = "Date  ";
+        timetable[0][1] = "Event  ";
+        timetable[0][2] = "Start time  ";
+        timetable[0][3] = "End time  ";
+        timetable[0][4] = "Comment  ";
+
+        for (int i = 1; i <= numberOfEvents + 1; i++) {
+            for (int j = 0; j < 5; j++) {
+                System.out.println("What date is your event? (dd/MM/yyyy");
+                timetable[i][j] = scan.nextLine();
+                System.out.println("What's the name of your event?");
+                timetable[i][j] = scan.nextLine();
+                System.out.println("What time does your event start?");
+                timetable[i][j] = scan.nextLine();
+                System.out.println("What time does your event finish?");
+                timetable[i][j] = scan.nextLine();
+                System.out.println("Leave a comment about your event:");
+                timetable[i][j] = scan.nextLine();
+            }
+        }
+        for (int i = 0; i < timetable.length; i++) {
+            for (int j = 0; j < timetable[0].length; j++) {
+                System.out.print(timetable[i][j]);
+            }
+            System.out.println();
+        }
+
 
     }
 
