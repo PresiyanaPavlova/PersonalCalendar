@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 public class test2 {
     public static void printMonthTitle(int month) {
-        System.out.println("       " + getMonthName(month) + " " + "2012");
-        System.out.println("---------------");
-        System.out.println("  Sun Mon Tue Wed Thu Fri Sat");
+        System.out.println("     " + getMonthName(month) + " " + "2022");
+        System.out.println("----------------------------");
+        System.out.println("S   M   T   W   T   F   S");
     }
 
     public static String getMonthName(int month) {
@@ -37,27 +37,27 @@ public class test2 {
     public static void printMonthBody(int month) {
         int startDay = getStartDay(month);
         int numberOfDaysInMonth = getNumberOfDaysInMonth(month);
-
-        for (int i = 0; i < startDay; i++) {
-            System.out.println("   ");
-        }
+        int repeatSpace = 7 - findDayOfTheWeek(month,1,2022);
+        System.out.print("   ".repeat(repeatSpace));                   //TODO: fix this spacing
         for (int i = 1; i <= numberOfDaysInMonth; i++) {
             if (i < 10) {
-                System.out.print("      " + i);
+                System.out.print("  " + i);
             } else {
-                System.out.print("      " + i);
+                System.out.print(" " + i);
             }
             if ((i + startDay) % 7 == 0) {
                 System.out.println();
             }
-            System.out.println();
         }
     }
+
     public static int getStartDay (int month){
        int totalNumberOfDays = getNumberOfDaysInMonth(month);
-        return (totalNumberOfDays + findDay(month,1, 2022)) % 7;
+
+        return (totalNumberOfDays + (7 - findDayOfTheWeek(month,1, 2022)) % 7);
    }
-   public static int findDay(int month, int day, int year) {                      //determine which day of the week
+
+   public static int findDayOfTheWeek(int month, int day, int year) {                      //determine which day of the week
         SimpleDateFormat simpleDateformat = new SimpleDateFormat("EEEE");
         Date date = new GregorianCalendar(year, month - 1, day).getTime();     //see how to get rid of year, so it's2022 by default, and day 1 as default
         String dayOfTheWeek = simpleDateformat.format(date);
