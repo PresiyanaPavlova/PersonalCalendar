@@ -122,139 +122,103 @@ public class test2 {
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome to your personal calendar! What would you like to do? (1 - Create an event | 2 - Daily schedule | 3 - Search event | 4 - Find availability)");
         int option = scan.nextInt();
-        switch (option) {
-            case 1:
-                createEvent(scan, option);
-                break;
-            case 2:
-                dailySchedule();
-                break;
-            case 3:
+//        while (true) {
+//            switch (option) {
+//                case 1:
+//                    createEvent(scan);
+//                    break;
+//                case 2:
+//                    dailySchedule(scan);
+//                    break;
+//                case 3:
+//                    searchEvent();
+//                    break;
+//                case 4:
+//                    findAvailability();
+//                    break;
+//                default:
+//                    System.out.println("Invalid input.");
+//            }
+
+        while(true) {
+            if (option == 1) {
+                createEvent(scan);
+            } else if (option == 2) {
+                dailySchedule(scan);
+            } else if (option == 3) {
                 searchEvent();
-                break;
-            case 4:
+            } else if (option == 4) {
                 findAvailability();
-                break;
-            default:
+            } else {
                 System.out.println("Invalid input.");
+            }
+            System.out.println("Choose your option:");
+            option = scan.nextInt();
         }
 
-        System.out.println("Welcome to your personal calendar! It looks empty, let's create an event.\nWhich month would you like to see?");
-        int month = scan.nextInt();
-        printMonthTitle(month);
-        printMonthBody(month);
-        System.out.println();
 
-        //   createEvent(scan, option);
+//        System.out.println("Welcome to your personal calendar! It looks empty, let's create an event.\nWhich month would you like to see?");
+//        int month = scan.nextInt();
+//        printMonthTitle(month);
+//        printMonthBody(month);
+//        System.out.println();
 
-    }
+
+
+
+        }
+
+
+
+
 
     //starting the schedule
-//    public static void createEvent(Scanner scan) {
-//
-//        System.out.println("What date would you like to schedule an event for?");
-//        String date = scan.nextLine();
-//        scan.nextLine();                                                            //to fix the nextLine skipping problem
-//        System.out.println("How many events would you like to schedule for this day?");
-//        int numberOfEvents = scan.nextInt();
-//        String[][] timetable = new String[numberOfEvents + 1][5];
-//
-//        timetable[0][0] = "Date  ";
-//        timetable[0][1] = "Event  ";
-//        timetable[0][2] = "Start time  ";
-//        timetable[0][3] = "End time  ";
-//        timetable[0][4] = "Comment  ";
-//        timetable[1][0] = date;
-//
-//        for (int i = 1; i <= numberOfEvents + 1; i++) {                   //can't get out of this loop for some reason?
-//            for (int j = 1; j < 5; j++) {
-//                System.out.println("What's the name of your event?");
-//                timetable[i][j] = scan.nextLine();
-//                scan.nextLine();
-//                System.out.println("What time does your event start?");
-//                timetable[i][j] = scan.nextLine();
-//                scan.nextLine();
-//                System.out.println("What time does your event finish?");
-//                timetable[i][j] = scan.nextLine();
-//                scan.nextLine();
-//                System.out.println("Leave a comment about your event:");
-//                timetable[i][j] = scan.nextLine();
-//                scan.nextLine();
-//            }
-//        }
-//        for (int i = 0; i < timetable.length; i++) {
-//            for (int j = 0; j < timetable[0].length; j++) {
-//                System.out.print(timetable[i][j]);
-//            }
-//            System.out.println();
-//        }
-//    }
-    public static void createEvent(Scanner scan, int option) {
+    public static String[][] createEvent(Scanner scan) {
         String answer = scan.nextLine();
         System.out.println("How many events would you like to schedule for this day?");
         int numberOfEvents = scan.nextInt();
         scan.nextLine();
-        String[][] newEvent = new String[numberOfEvents + 1][5];
-        newEvent[0][0] = "Date  ";
-        newEvent[0][1] = "Event  ";
-        newEvent[0][2] = "Start time  ";
-        newEvent[0][3] = "End time  ";
-        newEvent[0][4] = "Comment  ";
+        String[][] eventCalendar = new String[numberOfEvents + 1][5];
 
-        for (int i = 1; i < newEvent.length; i++) {
-            System.out.println("Please enter the event name, the date, the start time, the end time, and a comment:");
-
-            while (scan.hasNext()) {
-                newEvent[i][0] = scan.nextLine();
-                newEvent[i][1] = scan.nextLine();
-                newEvent[i][2] = scan.nextLine();
-                newEvent[i][3] = scan.nextLine();
-                newEvent[i][4] = scan.nextLine();
+        eventCalendar[0][0] = "Date  ";
+        eventCalendar[0][1] = "Event  ";
+        eventCalendar[0][2] = "Start time  ";
+        eventCalendar[0][3] = "End time  ";
+        eventCalendar[0][4] = "Comment  ";
+        System.out.println("Please enter the event date, the name of the event, the start time, the end time, and a comment:");
+        for (int i = 1; i < eventCalendar.length; i++) {
+                        while (scan.hasNext()) {
+                eventCalendar[i][0] = scan.nextLine();                                       //TODO add questions
+                eventCalendar[i][1] = scan.nextLine();
+                eventCalendar[i][2] = scan.nextLine();
+                eventCalendar[i][3] = scan.nextLine();
+                eventCalendar[i][4] = scan.nextLine();
                 if (numberOfEvents > 1){
-                            System.out.println("Enter next");
+                            System.out.println("Enter next event info:");
                         }
                         break;
               }
         }
-
-//        while (true) {
-//            if (answer.toLowerCase().equals("yes") || option == 1) {
-//                System.out.println("Please enter the event name, the date, the start time, the end time, and a comment:");
-//                for (int i = 1; i < numberOfEvents + 1; i++) {
-//                    for (int j = 0; j < 5; j++) {
-//                        scan.nextLine();
-//                        newEvent[i][j] = scan.nextLine();
-//                        newEvent[i][j] = scan.nextLine();
-//                        newEvent[i][j] = scan.nextLine();
-//                        newEvent[i][j] = scan.nextLine();
-//                        newEvent[i][j] = scan.nextLine();
-//                        if (numberOfEvents > 1 ){
-//                            System.out.println("Enter next");
-//                        }
-//                        break;
-//                    }
-//                }
-
-//                System.out.println("Would you like to make another event?");
-//                answer = scan.nextLine();
-//                option = 0;
-//            } else if (answer.toLowerCase().equals("no")) {
-//                System.out.println("Okay np");
-//                break;
+        return eventCalendar;
+//        for (int i = 0; i < eventCalendar.length; i++) {
+//            for (int j = 0; j < eventCalendar[0].length; j++) {
+//                System.out.print(eventCalendar[i][j] + " ");
 //            }
+//            System.out.println();
 //        }
-
-        for (int i = 0; i < newEvent.length; i++) {
-            for (int j = 0; j < newEvent[0].length; j++) {
-                System.out.print(newEvent[i][j] + " ");
-            }
-            System.out.println();
-        }
-
     }
 
-        public static void dailySchedule() {
-
+        public static void dailySchedule(Scanner scan) {
+            System.out.println("Please enter a date:");
+            String dateSearch = scan.nextLine();
+            String[] temporary = new String[2];
+            for (int i = 0; i < createEvent(scan).length; i++) {
+                for (int j = 0; j < createEvent(scan)[0].length ; j++){
+                    if (createEvent(scan)[i][0].equals(dateSearch)) {
+                        System.out.println(createEvent(scan)[i][j]);
+                    }
+                }
+            }
         }
         public static void searchEvent() {
 
