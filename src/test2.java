@@ -7,7 +7,7 @@ public class test2 {
     public static void printMonthTitle(int month) {
         System.out.println("     " + getMonthName(month) + " " + "2022");
         System.out.println("----------------------------");
-        System.out.println("M   T   W   T   F  S  S");
+        System.out.println(" M   T   W   T   F   S   S");
     }
     public static String getMonthName(int month) {
         String monthName = null;
@@ -30,28 +30,21 @@ public class test2 {
         return monthName;
     }
     public static void printMonthBody(int month) {
-        int counterSpace = 1;
-        for (int i = findDayOfTheWeek(month, 1, 2022); i <= 7; i++) {
-            counterSpace++;
+
+        String initialSpace = "";
+        for (int i = 0; i < findDayOfTheWeek(month, 1, 2022) - 1; i++) {
+            initialSpace += "   ";
         }
+        System.out.print(initialSpace);
 
-        System.out.print("-".repeat(7 - counterSpace));                   //TODO: fix this spacing
-
-        for (int i = 1; i <= getNumberOfDaysInMonth(month); i++) {
-            if (i < 10) {
-                System.out.print("  " + i);
-            } else {
-                System.out.print(" " + i);
+        for (int i = 0, dayOfMonth = 1; dayOfMonth <= getNumberOfDaysInMonth(month); i++) {
+            for (int j = ((i == 0) ? findDayOfTheWeek(month, 1,2022) - 1 : 0); j < 7 && (dayOfMonth <= getNumberOfDaysInMonth(month)); j++) {
+                System.out.printf("%2d ", dayOfMonth);
+                dayOfMonth++;
             }
-            if ((i + getStartDay(month)) % 7 == 0) {
-                System.out.println();
-            }
+            System.out.println();
         }
     }
-    public static int getStartDay (int month){
-       int totalNumberOfDays = getNumberOfDaysInMonth(month);
-        return (totalNumberOfDays + (findDayOfTheWeek(month,1, 2022)) % 7);
-   }
    public static int findDayOfTheWeek(int month, int day, int year) {                      //determine which day of the week
         SimpleDateFormat simpleDateformat = new SimpleDateFormat("EEEE");
         Date date = new GregorianCalendar(year, month - 1, day).getTime();
