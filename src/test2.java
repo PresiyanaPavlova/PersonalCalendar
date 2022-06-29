@@ -1,7 +1,6 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class test2 {
@@ -10,26 +9,52 @@ public class test2 {
         System.out.println("----------------------------");
         System.out.println(" M  T  W  T  F  S  S");
     }
+
     public static String getMonthName(int month) {
         String monthName = null;
         switch (month) {
-            case 1: monthName = "January"; break;
-            case 2: monthName = "February"; break;
-            case 3: monthName = "March"; break;
-            case 4: monthName = "April"; break;
-            case 5: monthName = "May"; break;
-            case 6: monthName = "June"; break;
-            case 7: monthName = "July"; break;
-            case 8: monthName = "August"; break;
-            case 9: monthName = "September"; break;
-            case 10: monthName = "October"; break;
-            case 11: monthName = "November"; break;
-            case 12: monthName = "December"; break;
+            case 1:
+                monthName = "January";
+                break;
+            case 2:
+                monthName = "February";
+                break;
+            case 3:
+                monthName = "March";
+                break;
+            case 4:
+                monthName = "April";
+                break;
+            case 5:
+                monthName = "May";
+                break;
+            case 6:
+                monthName = "June";
+                break;
+            case 7:
+                monthName = "July";
+                break;
+            case 8:
+                monthName = "August";
+                break;
+            case 9:
+                monthName = "September";
+                break;
+            case 10:
+                monthName = "October";
+                break;
+            case 11:
+                monthName = "November";
+                break;
+            case 12:
+                monthName = "December";
+                break;
             default:
                 System.out.println("Invalid input.");
         }
         return monthName;
     }
+
     public static void printMonthBody(int month) {
 
         String initialSpace = "";
@@ -39,63 +64,92 @@ public class test2 {
         System.out.print(initialSpace);
 
         for (int i = 0, dayOfMonth = 1; dayOfMonth <= getNumberOfDaysInMonth(month); i++) {
-            for (int j = ((i == 0) ? findDayOfTheWeek(month, 1,2022) - 1 : 0); j < 7 && (dayOfMonth <= getNumberOfDaysInMonth(month)); j++) {
+            for (int j = ((i == 0) ? findDayOfTheWeek(month, 1, 2022) - 1 : 0); j < 7 && (dayOfMonth <= getNumberOfDaysInMonth(month)); j++) {
                 System.out.printf("%2d ", dayOfMonth);
                 dayOfMonth++;
             }
             System.out.println();
         }
     }
-   public static int findDayOfTheWeek(int month, int day, int year) {                      //determine which day of the week
+
+    public static int findDayOfTheWeek(int month, int day, int year) {                      //determine which day of the week
         SimpleDateFormat simpleDateformat = new SimpleDateFormat("EEEE");
         Date date = new GregorianCalendar(year, month - 1, day).getTime();
         String dayOfTheWeek = simpleDateformat.format(date);
         int dayOfTheWeekInt = 0;
-        switch (dayOfTheWeek.toUpperCase()){
-            case "MONDAY" : dayOfTheWeekInt = 1; break;
-            case "TUESDAY": dayOfTheWeekInt = 2; break;
-            case "WEDNESDAY": dayOfTheWeekInt = 3; break;
-            case "THURSDAY": dayOfTheWeekInt = 4; break;
-            case "FRIDAY": dayOfTheWeekInt = 5; break;
-            case "SATURDAY": dayOfTheWeekInt = 6; break;
-            case "SUNDAY": dayOfTheWeekInt = 7;
+        switch (dayOfTheWeek.toUpperCase()) {
+            case "MONDAY":
+                dayOfTheWeekInt = 1;
+                break;
+            case "TUESDAY":
+                dayOfTheWeekInt = 2;
+                break;
+            case "WEDNESDAY":
+                dayOfTheWeekInt = 3;
+                break;
+            case "THURSDAY":
+                dayOfTheWeekInt = 4;
+                break;
+            case "FRIDAY":
+                dayOfTheWeekInt = 5;
+                break;
+            case "SATURDAY":
+                dayOfTheWeekInt = 6;
+                break;
+            case "SUNDAY":
+                dayOfTheWeekInt = 7;
         }
         return dayOfTheWeekInt;
     }
-    public static int getNumberOfDaysInMonth (int month){
+
+    public static int getNumberOfDaysInMonth(int month) {
         int numberOfDaysInMonth = 0;
-        switch (month){
+        switch (month) {
             case 1, 3, 5, 7, 8, 10, 12:
-                numberOfDaysInMonth = 31; break;
-            case 2: numberOfDaysInMonth = 28; break;
+                numberOfDaysInMonth = 31;
+                break;
+            case 2:
+                numberOfDaysInMonth = 28;
+                break;
             case 4, 6, 9, 11:
-                numberOfDaysInMonth = 30; break;
+                numberOfDaysInMonth = 30;
+                break;
         }
         return numberOfDaysInMonth;
     }
-       public static void main(String[] args) {
-           Scanner scan = new Scanner(System.in);
-           System.out.println("Welcome to your personal calendar! What would you like to do? (1 - Create an event | 2 - Daily schedule | 3 - Search event | 4 - Find availability)");
-           int option = scan.nextInt();
-           switch (option) {
-               case 1: createEvent(scan, option); break;
-               case 2: dailySchedule(); break;
-               case 3: searchEvent(); break;
-               case 4: findAvailability(); break;
-               default:
-                   System.out.println("Invalid input.");
-           }
 
-           System.out.println("Welcome to your personal calendar! It looks empty, let's create an event.\nWhich month would you like to see?");
-           int month = scan.nextInt();
-           printMonthTitle(month);
-           printMonthBody(month);
-           System.out.println();
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Welcome to your personal calendar! What would you like to do? (1 - Create an event | 2 - Daily schedule | 3 - Search event | 4 - Find availability)");
+        int option = scan.nextInt();
+        switch (option) {
+            case 1:
+                createEvent(scan, option);
+                break;
+            case 2:
+                dailySchedule();
+                break;
+            case 3:
+                searchEvent();
+                break;
+            case 4:
+                findAvailability();
+                break;
+            default:
+                System.out.println("Invalid input.");
+        }
 
-       //   createEvent(scan, option);
+        System.out.println("Welcome to your personal calendar! It looks empty, let's create an event.\nWhich month would you like to see?");
+        int month = scan.nextInt();
+        printMonthTitle(month);
+        printMonthBody(month);
+        System.out.println();
 
-       }
-       //starting the schedule
+        //   createEvent(scan, option);
+
+    }
+
+    //starting the schedule
 //    public static void createEvent(Scanner scan) {
 //
 //        System.out.println("What date would you like to schedule an event for?");
@@ -135,36 +189,56 @@ public class test2 {
 //            System.out.println();
 //        }
 //    }
-        public static void createEvent(Scanner scan, int option) {
-           String answer = scan.nextLine();
-            String[] newEvent = new String[5];
-            while (true) {
-                if(answer.toLowerCase().equals("yes") || option == 1) {
-                    System.out.println("Please enter the event name, the date, the start time, the end time, and a comment:");
-                    newEvent = new String[]{scan.nextLine(), scan.nextLine(), scan.nextLine(), scan.nextLine(), scan.nextLine()};
-                    System.out.println("Would you like to make another event?");
-                    answer = scan.nextLine();
-                    option = 0;
-                } else if (answer.toLowerCase().equals("no")) {
-                    System.out.println("Okay np");
-                    break;
+    public static void createEvent(Scanner scan, int option) {
+        String answer = scan.nextLine();
+        System.out.println("How many events would you like to schedule for this day?");
+        int numberOfEvents = scan.nextInt();
+        String[][] newEvent = new String[numberOfEvents + 1][5];
+        newEvent[0][0] = "Date  ";
+        newEvent[0][1] = "Event  ";
+        newEvent[0][2] = "Start time  ";
+        newEvent[0][3] = "End time  ";
+        newEvent[0][4] = "Comment  ";
+
+
+        while (true) {
+            if (answer.toLowerCase().equals("yes") || option == 1) {
+                System.out.println("Please enter the event name, the date, the start time, the end time, and a comment:");
+                for (int i = 1; i < numberOfEvents + 1; i++) {
+                    for (int j = 0; j < 5; j++) {
+                        newEvent[i][j] = scan.nextLine();
+                        newEvent[i][j] = scan.nextLine();
+                        newEvent[i][j] = scan.nextLine();
+                        newEvent[i][j] = scan.nextLine();
+                        newEvent[i][j] = scan.nextLine();
+                        if (numberOfEvents > 1){
+                            System.out.println("Enter next");
+                        }
+                        break;
+                    }
                 }
+
+                System.out.println("Would you like to make another event?");
+                answer = scan.nextLine();
+                option = 0;
+            } else if (answer.toLowerCase().equals("no")) {
+                System.out.println("Okay np");
+                break;
             }
-
-            System.out.println("You entered:");
-            for (int i = 0; i < 5; i++) {
-                System.out.println(newEvent[i]);
-            }
         }
-        public static void dailySchedule(){
+    }
+
+        public static void dailySchedule() {
 
         }
-        public static void searchEvent(){
+        public static void searchEvent() {
 
         }
-        public static void findAvailability(){
+        public static void findAvailability () {
 
         }
     }
+
+
 
 
