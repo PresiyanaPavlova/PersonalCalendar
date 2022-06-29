@@ -193,6 +193,7 @@ public class test2 {
         String answer = scan.nextLine();
         System.out.println("How many events would you like to schedule for this day?");
         int numberOfEvents = scan.nextInt();
+        scan.nextLine();
         String[][] newEvent = new String[numberOfEvents + 1][5];
         newEvent[0][0] = "Date  ";
         newEvent[0][1] = "Event  ";
@@ -200,32 +201,56 @@ public class test2 {
         newEvent[0][3] = "End time  ";
         newEvent[0][4] = "Comment  ";
 
+        for (int i = 1; i < newEvent.length; i++) {
+            System.out.println("Please enter the event name, the date, the start time, the end time, and a comment:");
 
-        while (true) {
-            if (answer.toLowerCase().equals("yes") || option == 1) {
-                System.out.println("Please enter the event name, the date, the start time, the end time, and a comment:");
-                for (int i = 1; i < numberOfEvents + 1; i++) {
-                    for (int j = 0; j < 5; j++) {
-                        newEvent[i][j] = scan.nextLine();
-                        newEvent[i][j] = scan.nextLine();
-                        newEvent[i][j] = scan.nextLine();
-                        newEvent[i][j] = scan.nextLine();
-                        newEvent[i][j] = scan.nextLine();
-                        if (numberOfEvents > 1){
+            while (scan.hasNext()) {
+                newEvent[i][0] = scan.nextLine();
+                newEvent[i][1] = scan.nextLine();
+                newEvent[i][2] = scan.nextLine();
+                newEvent[i][3] = scan.nextLine();
+                newEvent[i][4] = scan.nextLine();
+                if (numberOfEvents > 1){
                             System.out.println("Enter next");
                         }
                         break;
-                    }
-                }
-
-                System.out.println("Would you like to make another event?");
-                answer = scan.nextLine();
-                option = 0;
-            } else if (answer.toLowerCase().equals("no")) {
-                System.out.println("Okay np");
-                break;
-            }
+              }
         }
+
+//        while (true) {
+//            if (answer.toLowerCase().equals("yes") || option == 1) {
+//                System.out.println("Please enter the event name, the date, the start time, the end time, and a comment:");
+//                for (int i = 1; i < numberOfEvents + 1; i++) {
+//                    for (int j = 0; j < 5; j++) {
+//                        scan.nextLine();
+//                        newEvent[i][j] = scan.nextLine();
+//                        newEvent[i][j] = scan.nextLine();
+//                        newEvent[i][j] = scan.nextLine();
+//                        newEvent[i][j] = scan.nextLine();
+//                        newEvent[i][j] = scan.nextLine();
+//                        if (numberOfEvents > 1 ){
+//                            System.out.println("Enter next");
+//                        }
+//                        break;
+//                    }
+//                }
+
+//                System.out.println("Would you like to make another event?");
+//                answer = scan.nextLine();
+//                option = 0;
+//            } else if (answer.toLowerCase().equals("no")) {
+//                System.out.println("Okay np");
+//                break;
+//            }
+//        }
+
+        for (int i = 0; i < newEvent.length; i++) {
+            for (int j = 0; j < newEvent[0].length; j++) {
+                System.out.print(newEvent[i][j] + " ");
+            }
+            System.out.println();
+        }
+
     }
 
         public static void dailySchedule() {
