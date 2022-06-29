@@ -7,7 +7,7 @@ public class test2 {
     public static void printMonthTitle(int month) {
         System.out.println("     " + getMonthName(month) + " " + "2022");
         System.out.println("----------------------------");
-        System.out.println(" M   T   W   T   F   S   S");
+        System.out.println(" M  T  W  T  F  S  S");
     }
     public static String getMonthName(int month) {
         String monthName = null;
@@ -86,9 +86,10 @@ public class test2 {
 
         System.out.println("What date would you like to schedule an event for?");
         String date = scan.nextLine();
+        scan.nextLine();                                                            //to fix the nextLine skipping problem
         System.out.println("How many events would you like to schedule for this day?");
         int numberOfEvents = scan.nextInt();
-        String[][] timetable = new String[numberOfEvents][5];
+        String[][] timetable = new String[numberOfEvents+1][5];
 
         timetable[0][0] = "Date  ";
         timetable[0][1] = "Event  ";
@@ -96,10 +97,11 @@ public class test2 {
         timetable[0][3] = "End time  ";
         timetable[0][4] = "Comment  ";
 
-        for (int i = 1; i <= numberOfEvents + 1; i++) {
+        for (int i = 1; i <= numberOfEvents + 1; i++) {                   //can't get out of this loop for some reason?
             for (int j = 0; j < 5; j++) {
-                System.out.println("What date is your event? (dd/MM/yyyy");
+                System.out.println("What date is your event? (dd/MM/yyyy)");
                 timetable[i][j] = scan.nextLine();
+                scan.nextLine();                                        //to fix the nextLine skipping problem
                 System.out.println("What's the name of your event?");
                 timetable[i][j] = scan.nextLine();
                 System.out.println("What time does your event start?");
@@ -108,6 +110,7 @@ public class test2 {
                 timetable[i][j] = scan.nextLine();
                 System.out.println("Leave a comment about your event:");
                 timetable[i][j] = scan.nextLine();
+                scan.nextLine();
             }
         }
         for (int i = 0; i < timetable.length; i++) {
