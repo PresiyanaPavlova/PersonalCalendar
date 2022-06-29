@@ -1,6 +1,7 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class test2 {
@@ -79,17 +80,18 @@ public class test2 {
            printMonthTitle(month);
            printMonthBody(month);
            System.out.println();
+ //         createEvent(scan);
            userInputEventInfo(scan);
        }
        //starting the schedule
-    public static void userInputEventInfo (Scanner scan){
+    public static void userInputEventInfo (Scanner scan) {
 
         System.out.println("What date would you like to schedule an event for?");
         String date = scan.nextLine();
         scan.nextLine();                                                            //to fix the nextLine skipping problem
         System.out.println("How many events would you like to schedule for this day?");
         int numberOfEvents = scan.nextInt();
-        String[][] timetable = new String[numberOfEvents+1][5];
+        String[][] timetable = new String[numberOfEvents + 1][5];
 
         timetable[0][0] = "Date  ";
         timetable[0][1] = "Event  ";
@@ -99,15 +101,18 @@ public class test2 {
 
         for (int i = 1; i <= numberOfEvents + 1; i++) {                   //can't get out of this loop for some reason?
             for (int j = 0; j < 5; j++) {
-                System.out.println("What date is your event? (dd/MM/yyyy)");
-                timetable[i][j] = scan.nextLine();
-                scan.nextLine();                                        //to fix the nextLine skipping problem
+
+                timetable[i][j] = date;
+                j++;
                 System.out.println("What's the name of your event?");
                 timetable[i][j] = scan.nextLine();
+                j++;
                 System.out.println("What time does your event start?");
                 timetable[i][j] = scan.nextLine();
+                j++;
                 System.out.println("What time does your event finish?");
                 timetable[i][j] = scan.nextLine();
+                j++;
                 System.out.println("Leave a comment about your event:");
                 timetable[i][j] = scan.nextLine();
                 scan.nextLine();
@@ -119,8 +124,29 @@ public class test2 {
             }
             System.out.println();
         }
-
+    }
+//        public static void createEvent(Scanner scan){
+//            String[] event1 = {"Dentist", "2/2/2022","10:00","11:00","Don't be late."};
+//            System.out.println("Do you want to make a new event?");
+//            scan.nextLine();
+//            String answer = scan.nextLine();
+//            //can't make a new array every time it runs
+//            while (answer.toLowerCase().equals("yes")) {
+//                System.out.println("Please enter the event name, the date, the start time, the end time, and a comment:");
+//                String[] newEvent = {scan.nextLine(), scan.nextLine(), scan.nextLine(), scan.nextLine(), scan.nextLine()};
+//
+//            }
+//                if (answer.toLowerCase().equals("no")){
+//                    System.out.println("Okay np");
+//                }
+//            }
+//            if (answer.toLowerCase().equals("yes")) {
+//                System.out.println("Please enter the event name, the date, the start time, the end time, and a comment:");
+//                String[] newEvent = {scan.nextLine(), scan.nextLine(), scan.nextLine(), scan.nextLine(), scan.nextLine()};
+//            } else {
+//                System.exit(0);
+//            }
 
     }
 
-}
+
