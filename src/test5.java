@@ -2,19 +2,24 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class test5 {
-    private static final ArrayList<String[]> events = new ArrayList<>();{
+    private static ArrayList<String[]> events = new ArrayList<>();{
         String[] addedEvent1 = {"30.06.2022", "Project Hand-in", "14:00", "15:00", "Failure is not an option."};
         String[] addedEvent2 = {"30.06.2022", "Gym", "15:00", "16:00", "Stretching."};
         String[] addedEvent3 = {"30.06.2022", "Laundry", "16:00", "17:00", "Color only."};
         events.add(addedEvent1);
         events.add(addedEvent2);
         events.add(addedEvent3);
-
     }
 
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        System.out.println("This");
+        for (int i = 0; i < events.size(); i++) {
+            System.out.println(events.get(i));
+        }
+
+
 
         while (true) {
             System.out.println("");
@@ -45,7 +50,7 @@ public class test5 {
         while (true) {
             if (answer.toLowerCase().equals("yes")) {
                 System.out.println("");
-                System.out.println("Please enter the event date, the event name, the start time, the end time, and a comment:");
+                System.out.println("Please enter the event date(dd.MM.yyyy), the event name, the start time, the end time, and a comment:");
                 scan.nextLine();
                 String date = scan.nextLine();
                 String name = scan.nextLine();
@@ -72,20 +77,37 @@ public class test5 {
     private static void dailySchedule(Scanner scan) {
         System.out.println("Enter date: ");
         String searchDate = scan.next();
-        for (String[] event : events) {
-            System.out.println("");
+//        for (String[] event : events) {
+//            System.out.println("");
+//
+//            if (searchDate.equals(event[1])) {
+//                System.out.print(event[2]);
+//                System.out.print(" - ");
+//                System.out.print(event[3]);
+//                System.out.print(" ");
+//                System.out.print(event[0]);
+//                if (!event[4].equals("")) {
+//                    System.out.print(":");
+//                    System.out.print(event[4]);
+//                }
+//            }
+//        }
 
-            if (searchDate.equals(event[1])) {
-                System.out.print(event[2]);
-                System.out.print(" - ");
-                System.out.print(event[3]);
-                System.out.print(" ");
-                System.out.print(event[0]);
-                if (!event[4].equals("")) {
-                    System.out.print(":");
-                    System.out.print(event[4]);
+        for (String[] event : events) {
+            for (String search : event) {
+                if (search.contains(searchDate)) {
+                    System.out.print(event[2]);
+                    System.out.print(" - ");
+                    System.out.print(event[3]);
+                    System.out.print(" ");
+                    System.out.print(event[0]);
+                    if (!event[4].equals("")) {
+                        System.out.print(":");
+                        System.out.print(event[4]);
+                    }
                 }
             }
+
         }
     }
 
