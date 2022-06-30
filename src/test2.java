@@ -1,9 +1,12 @@
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
-
 public class test2 {
+
+    private static final ArrayList<String[]> events = new ArrayList<>();
+
     public static void printMonthTitle(int month) {
         System.out.println("     " + getMonthName(month) + " " + "2022");
         System.out.println("----------------------------");
@@ -119,7 +122,7 @@ public class test2 {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Welcome to your personal calendar! Which month would you like to see? (1-12)");
+        System.out.println("Welcome to your personal calendar! Scheduling isn't easy without looking at the calendar. Which month would you like to see? (1-12)");
         int month = scan.nextInt();
         printMonthTitle(month);
         printMonthBody(month);
@@ -140,7 +143,7 @@ public class test2 {
             } else if (option == 2) {
                 dailySchedule(scan);
             } else if (option == 3) {
-                searchEvent();
+                searchEvent(scan);
             } else if (option == 4) {
                 findAvailability();
             } else {
@@ -154,19 +157,28 @@ public class test2 {
 
     //starting the schedule
     public static String[][] createEvent(Scanner scan) {
-        String answer = scan.nextLine();
         System.out.println("How many events would you like to schedule for this day?");
         int numberOfEvents = scan.nextInt();
         scan.nextLine();
-        String[][] eventCalendar = new String[numberOfEvents + 1][5];             //2d array to store the event's information
+        String[][] eventCalendar = new String[numberOfEvents + 3][5];             //2d array to store the events' information
         eventCalendar[0][0] = "Date  ";
         eventCalendar[0][1] = "Event  ";
         eventCalendar[0][2] = "Start time  ";
         eventCalendar[0][3] = "End time  ";
         eventCalendar[0][4] = "Comment  ";
+        eventCalendar[1][0] = "30/6/2022";
+        eventCalendar[1][1] = "Dentist";
+        eventCalendar[1][2] = "10:00";
+        eventCalendar[1][3] = "11:00";
+        eventCalendar[1][4] = "Don't be late.";
+        eventCalendar[2][0] = "30/6/2022";
+        eventCalendar[2][1] = "Project Hand-in";
+        eventCalendar[2][2] = "19:00";
+        eventCalendar[2][3] = "20:00";
+        eventCalendar[2][4] = "Failure is not an option.";
 
         System.out.println("Please enter the event date, the name of the event, the start time, the end time, and a comment:");
-        for (int i = 1; i < eventCalendar.length; i++) {
+        for (int i = 3; i < eventCalendar.length; i++) {
                         while (scan.hasNext()) {
                 eventCalendar[i][0] = scan.nextLine();
                 eventCalendar[i][1] = scan.nextLine();
@@ -180,23 +192,26 @@ public class test2 {
               }
         }
         return eventCalendar;
-
     }
 
         public static void dailySchedule(Scanner scan) {
-            System.out.println("Please enter a date:");
+            System.out.println("Please enter a date(dd/MM/yyyy):");
             String dateSearch = scan.nextLine();
-            String[] temporary = new String[2];
-            for (int i = 0; i < createEvent(scan).length; i++) {
-                for (int j = 0; j < createEvent(scan)[0].length ; j++){
+            for (int i = 1; i < createEvent(scan).length; i++) {
                     if (createEvent(scan)[i][0].equals(dateSearch)) {
-                        System.out.println(createEvent(scan)[i][j]);
+                        System.out.println(createEvent(scan)[i][0]);
                     }
                 }
             }
-        }
-        public static void searchEvent() {
 
+        public static void searchEvent(Scanner scan) {
+            System.out.println("Enter event name: ");
+            String nameSearch = scan.nextLine();
+            for (int i = 1; i < createEvent(scan).length; i++) {
+                    if (createEvent(scan)[i][1].equals(nameSearch)) {
+                        System.out.println(createEvent(scan)[i][1]);
+                    }
+            }
         }
         public static void findAvailability () {
 
