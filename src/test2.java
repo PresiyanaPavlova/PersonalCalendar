@@ -55,9 +55,8 @@ public class test2 {
         return monthName;
     }
 
-    public static void printMonthBody(int month) {
-
-        String initialSpace = "";
+    public static void printMonthBody(int month) {           //prints the actual calendar
+        String initialSpace = "";                            //space before the 1st date of the month
         for (int i = 0; i < findDayOfTheWeek(month, 1, 2022) - 1; i++) {
             initialSpace += "   ";
         }
@@ -72,7 +71,7 @@ public class test2 {
         }
     }
 
-    public static int findDayOfTheWeek(int month, int day, int year) {                      //determine which day of the week
+    public static int findDayOfTheWeek(int month, int day, int year) {                      //determine which day of the week the month starts from
         SimpleDateFormat simpleDateformat = new SimpleDateFormat("EEEE");
         Date date = new GregorianCalendar(year, month - 1, day).getTime();
         String dayOfTheWeek = simpleDateformat.format(date);
@@ -102,7 +101,7 @@ public class test2 {
         return dayOfTheWeekInt;
     }
 
-    public static int getNumberOfDaysInMonth(int month) {
+    public static int getNumberOfDaysInMonth(int month) {        //the total number of days per month for 2022
         int numberOfDaysInMonth = 0;
         switch (month) {
             case 1, 3, 5, 7, 8, 10, 12:
@@ -120,29 +119,24 @@ public class test2 {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Welcome to your personal calendar! What would you like to do? (1 - Create an event | 2 - Daily schedule | 3 - Search event | 4 - Find availability)");
-        int option = scan.nextInt();
-//        while (true) {
-//            switch (option) {
-//                case 1:
-//                    createEvent(scan);
-//                    break;
-//                case 2:
-//                    dailySchedule(scan);
-//                    break;
-//                case 3:
-//                    searchEvent();
-//                    break;
-//                case 4:
-//                    findAvailability();
-//                    break;
-//                default:
-//                    System.out.println("Invalid input.");
-//            }
+        System.out.println("Welcome to your personal calendar! Which month would you like to see? (1-12)");
+        int month = scan.nextInt();
+        printMonthTitle(month);
+        printMonthBody(month);
+        System.out.println();
 
+        System.out.println("What would you like to do? (1 - Create an event | 2 - Daily schedule | 3 - Search event | 4 - Find availability)");
+        int option = scan.nextInt();
         while(true) {
             if (option == 1) {
                 createEvent(scan);
+
+                for (int i = 0; i < createEvent(scan).length; i++) {     //to check what's been input
+                    for (int j = 0; j < createEvent(scan)[0].length; j++) {
+                        System.out.print(createEvent(scan)[i][j] + " ");
+                    }
+                    System.out.println();
+                }
             } else if (option == 2) {
                 dailySchedule(scan);
             } else if (option == 3) {
@@ -155,21 +149,7 @@ public class test2 {
             System.out.println("Choose your option:");
             option = scan.nextInt();
         }
-
-
-//        System.out.println("Welcome to your personal calendar! It looks empty, let's create an event.\nWhich month would you like to see?");
-//        int month = scan.nextInt();
-//        printMonthTitle(month);
-//        printMonthBody(month);
-//        System.out.println();
-
-
-
-
-        }
-
-
-
+                }
 
 
     //starting the schedule
@@ -178,34 +158,29 @@ public class test2 {
         System.out.println("How many events would you like to schedule for this day?");
         int numberOfEvents = scan.nextInt();
         scan.nextLine();
-        String[][] eventCalendar = new String[numberOfEvents + 1][5];
-
+        String[][] eventCalendar = new String[numberOfEvents + 1][5];             //2d array to store the event's information
         eventCalendar[0][0] = "Date  ";
         eventCalendar[0][1] = "Event  ";
         eventCalendar[0][2] = "Start time  ";
         eventCalendar[0][3] = "End time  ";
         eventCalendar[0][4] = "Comment  ";
+
         System.out.println("Please enter the event date, the name of the event, the start time, the end time, and a comment:");
         for (int i = 1; i < eventCalendar.length; i++) {
                         while (scan.hasNext()) {
-                eventCalendar[i][0] = scan.nextLine();                                       //TODO add questions
+                eventCalendar[i][0] = scan.nextLine();
                 eventCalendar[i][1] = scan.nextLine();
                 eventCalendar[i][2] = scan.nextLine();
                 eventCalendar[i][3] = scan.nextLine();
                 eventCalendar[i][4] = scan.nextLine();
                 if (numberOfEvents > 1){
-                            System.out.println("Enter next event info:");
+                            System.out.println("Enter next event info:");     //little bug here
                         }
                         break;
               }
         }
         return eventCalendar;
-//        for (int i = 0; i < eventCalendar.length; i++) {
-//            for (int j = 0; j < eventCalendar[0].length; j++) {
-//                System.out.print(eventCalendar[i][j] + " ");
-//            }
-//            System.out.println();
-//        }
+
     }
 
         public static void dailySchedule(Scanner scan) {
