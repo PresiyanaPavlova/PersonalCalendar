@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class PersonalCalendar {
     private static final ArrayList<String[]> events = new ArrayList<>();{
-    String[] addedEvent1 = {"30.06.2022", "Project Hand-in", "14:00", "15:00", " Failure is not an option."};
+    String[] addedEvent1 = {"30/06/2022", "Project Hand-in", "14:00", "15:00", " Failure is not an option."};
     String[] addedEvent2 = {"30.06.2022", "Gym", "15:00", "16:00", " Stretching."};
     String[] addedEvent3 = {"30.06.2022", "Laundry", "16:00", "17:00", " Color only."};
     String[] addedEvent4 = {"29.06.2022", "Class", "15:00", "17:00", " Don't forget your homework."};
@@ -141,12 +141,10 @@ public class PersonalCalendar {
         System.out.println("Enter date: ");
         String searchDate = scan.next();
         for (String[] event : events) {
-            System.out.println("");
             if (searchDate.equals(event[1])) {
                 System.out.print(event[2]);
                 System.out.print(" - ");
                 System.out.print(event[3]);
-                System.out.print(" ");
                 System.out.print(event[0]);
                 if (!event[4].equals("")) {
                     System.out.print(" : ");
@@ -160,7 +158,6 @@ public class PersonalCalendar {
         String searchName = scan.next();
         String[] foundEvent = null;
         for (String[] event : events) {
-            System.out.println("");
             String name = event[1];
             if (name.toLowerCase().contains(searchName)) {
                 System.out.print(event[1]);
@@ -202,13 +199,25 @@ public class PersonalCalendar {
 
     private static void findAvailability(Scanner scan) {     //not finished
         System.out.println("Enter date: ");
-        String date = scan.next();
+        String wantedDate = scan.next();
         System.out.println("From time: ");
-        String hour = scan.next();
+        String wantedHour = scan.next();
+        int wantedHourInt = Integer.parseInt(wantedHour.replace(":", ""));
+        System.out.println(wantedHourInt);
         System.out.println("Enter duration: ");
-        String duration = scan.next();
+        int wantedDuration = scan.nextInt();
 
         for (String[] event : events) {
+            if (wantedDate.equals(event[1]) && !wantedHour.equals(event[2])) {
+                int startTime = Integer.parseInt(event[2].replace(":", ""));
+                int endtTime = Integer.parseInt(event[3].replace(":", ""));
+                int availableDuration = (endtTime - startTime);
+
+            }
         }
+
+
+
+
     }
 }
