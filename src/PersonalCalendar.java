@@ -5,16 +5,17 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class PersonalCalendar {
-    private static final ArrayList<String[]> events = new ArrayList<>();
-
-    static {
-        String[] addedEvent1 = {"30.06.2022", "Project Hand-in", "14:00", "15:00", "Failure is not an option."};
-        String[] addedEvent2 = {"30.06.2022", "Gym", "15:00", "16:00", "Stretching."};
-        String[] addedEvent3 = {"30.06.2022", "Laundry", "16:00", "17:00", "Color only."};
+    private static final ArrayList<String[]> events = new ArrayList<>();{
+    String[] addedEvent1 = {"30.06.2022", "Project Hand-in", "14:00", "15:00", " Failure is not an option."};
+    String[] addedEvent2 = {"30.06.2022", "Gym", "15:00", "16:00", " Stretching."};
+    String[] addedEvent3 = {"30.06.2022", "Laundry", "16:00", "17:00", " Color only."};
+    String[] addedEvent4 = {"29.06.2022", "Class", "15:00", "17:00", " Don't forget your homework."};
         events.add(addedEvent1);
         events.add(addedEvent2);
         events.add(addedEvent3);
+        events.add(addedEvent4);
     }
+
     public static void printMonthTitle(int month) {
         System.out.println("     " + getMonthName(month) + " " + "2022");
         System.out.println("----------------------------");
@@ -86,15 +87,6 @@ public class PersonalCalendar {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        ArrayList<String[]> events = new ArrayList<>();
-        String[] addedEvent1 = {"30", "Project Hand-in", "14:00", "15:00", "Failure is not an option."};
-        String[] addedEvent2 = {"30.06.2022", "Gym", "15:00", "16:00", "Stretching."};
-        String[] addedEvent3 = {"30.06.2022", "Laundry", "16:00", "17:00", "Color only."};
-        String[] addedEvent4 = {"29.06.2022", "Class", "15:00", "17:00", "Don't forget your homework."};
-        events.add(addedEvent1);
-        events.add(addedEvent2);
-        events.add(addedEvent3);
-        events.add(addedEvent4);
 
         System.out.println("Welcome to your personal calendar! Scheduling isn't easy without looking at the calendar. Which month would you like to see? (1-12)");
         int month = scan.nextInt();
@@ -145,10 +137,11 @@ public class PersonalCalendar {
             }
         }
     }
-    private static void dailySchedule(Scanner scan) {    //doesn't work with the date, trying simpledateformat
+    private static void dailySchedule(Scanner scan) {
         System.out.println("Enter date: ");
         String searchDate = scan.next();
         for (String[] event : events) {
+            System.out.println("");
             if (searchDate.equals(event[1])) {
                 System.out.print(event[2]);
                 System.out.print(" - ");
@@ -168,7 +161,7 @@ public class PersonalCalendar {
         String[] foundEvent = null;
         for (String[] event : events) {
             System.out.println("");
-            String name = event[0];
+            String name = event[1];
             if (name.toLowerCase().contains(searchName)) {
                 System.out.print(event[1]);
                 System.out.print(" ");
@@ -196,7 +189,7 @@ public class PersonalCalendar {
                     events.remove(foundEvent);
                 }
             } else if (answer.equals("2")) {
-                System.out.println("Please enter the event's new name, the date, the start time, the end time, and a comment:");
+                System.out.println("Please enter the event's new date, the name, the start time, the end time, and a comment:");
                 scan.nextLine();
                 foundEvent[0] = scan.nextLine();
                 foundEvent[1] = scan.nextLine();
