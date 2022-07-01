@@ -6,14 +6,7 @@ import java.util.Scanner;
 
 public class PersonalCalendar {
     private static final ArrayList<String[]> events = new ArrayList<>();{
-    String[] addedEvent1 = {"30/06/2022", "Project Hand-in", "14:00", "15:00", " Failure is not an option."};
-    String[] addedEvent2 = {"30.06.2022", "Gym", "15:00", "16:00", " Stretching."};
-    String[] addedEvent3 = {"30.06.2022", "Laundry", "16:00", "17:00", " Color only."};
-    String[] addedEvent4 = {"29.06.2022", "Class", "15:00", "17:00", " Don't forget your homework."};
-        events.add(addedEvent1);
-        events.add(addedEvent2);
-        events.add(addedEvent3);
-        events.add(addedEvent4);
+
     }
 
     public static void printMonthTitle(int month) {
@@ -88,6 +81,15 @@ public class PersonalCalendar {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
+        String[] addedEvent1 = {"30/06/2022", "Project Hand-in", "14:00", "15:00", " Failure is not an option."};
+        String[] addedEvent2 = {"30.06.2022", "Gym", "15:00", "16:00", " Stretching."};
+        String[] addedEvent3 = {"30.06.2022", "Laundry", "16:00", "17:00", " Color only."};
+        String[] addedEvent4 = {"29.06.2022", "Class", "15:00", "17:00", " Don't forget your homework."};
+        events.add(addedEvent1);
+        events.add(addedEvent2);
+        events.add(addedEvent3);
+        events.add(addedEvent4);
+
         System.out.println("Welcome to your personal calendar! Scheduling isn't easy without looking at the calendar. Which month would you like to see? (1-12)");
         int month = scan.nextInt();
         printMonthTitle(month);
@@ -129,7 +131,7 @@ public class PersonalCalendar {
                 System.out.println("Would you like to make another event?");
                 answer = scan.next();
             } else if (answer.equalsIgnoreCase("no")) {
-                System.out.println("Okay np");
+                System.out.println("Okay, no problem.");
                 break;
             } else {
                 System.out.println("Unknown answer, \"yes\" or \"no\"");
@@ -141,15 +143,12 @@ public class PersonalCalendar {
         System.out.println("Enter date: ");
         String searchDate = scan.next();
         for (String[] event : events) {
-            if (searchDate.equals(event[1])) {
-                System.out.print(event[2]);
+            if (searchDate.equals(event[0])) {
+                System.out.print((event[1]) + " ");
+                System.out.print(event[2] + " ");
                 System.out.print(" - ");
-                System.out.print(event[3]);
-                System.out.print(event[0]);
-                if (!event[4].equals("")) {
-                    System.out.print(" : ");
-                    System.out.print(event[4]);
-                }
+                System.out.print(event[3] + " ");
+                System.out.print((event[4]) + " ");
             }
         }
     }
@@ -197,27 +196,23 @@ public class PersonalCalendar {
         }
     }
 
-    private static void findAvailability(Scanner scan) {     //not finished
+    private static void findAvailability(Scanner scan) {     //not finished, can't get inside the loop, doesn't recognise event[]
         System.out.println("Enter date: ");
         String wantedDate = scan.next();
         System.out.println("From time: ");
         String wantedHour = scan.next();
         int wantedHourInt = Integer.parseInt(wantedHour.replace(":", ""));
-        System.out.println(wantedHourInt);
         System.out.println("Enter duration: ");
         int wantedDuration = scan.nextInt();
 
-        for (String[] event : events) {
-            if (wantedDate.equals(event[1]) && !wantedHour.equals(event[2])) {
-                int startTime = Integer.parseInt(event[2].replace(":", ""));
-                int endtTime = Integer.parseInt(event[3].replace(":", ""));
-                int availableDuration = (endtTime - startTime);
 
+        for (String[] event : events) {
+            if (wantedDate.equals(event[1]) && wantedHour.equals(event[2])) {
+                int startTime = Integer.parseInt(event[2].replace(":", ""));
+                int endTime = Integer.parseInt(event[3].replace(":", ""));
+                int unavailableSlot = (endTime - startTime);
+                System.out.println("Next available slot: " + (unavailableSlot + wantedHourInt));
             }
         }
-
-
-
-
     }
 }
