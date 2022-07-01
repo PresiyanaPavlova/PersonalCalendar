@@ -145,12 +145,11 @@ public class PersonalCalendar {
             }
         }
     }
-    private static void dailySchedule(Scanner scan) {
-        ArrayList <String[]> temporary = new ArrayList<>();
+    private static void dailySchedule(Scanner scan) {    //doesn't work with the date, trying simpledateformat
         System.out.println("Enter date: ");
         String searchDate = scan.next();
         for (String[] event : events) {
-            if (events.contains(searchDate)) {
+            if (searchDate.equals(event[1])) {
                 System.out.print(event[2]);
                 System.out.print(" - ");
                 System.out.print(event[3]);
@@ -163,7 +162,7 @@ public class PersonalCalendar {
             }
         }
     }
-    private static void searchEvent(Scanner scan) {
+    private static void searchEvent(Scanner scan) {  //doesn't work
         System.out.println("Enter event name: ");
         String searchName = scan.next();
         String[] foundEvent = null;
@@ -208,7 +207,7 @@ public class PersonalCalendar {
         }
     }
 
-    private static void findAvailability(Scanner scan) {
+    private static void findAvailability(Scanner scan) {     //not finished
         System.out.println("Enter date: ");
         String date = scan.next();
         System.out.println("From time: ");
